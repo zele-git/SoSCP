@@ -7,6 +7,11 @@ import java.util.List;
 import java.util.Random;
 
 public class Scenario implements Serializable {
+    //defines ldz (number of, features) including policy
+
+    /*
+    at the start, ldz information along with randomly generated policy number [0, 5] is populated.
+     */
 
     private List<String> ldz = new ArrayList<>();
     private List<String> ldz2 = new ArrayList<>();
@@ -21,7 +26,10 @@ public class Scenario implements Serializable {
     private List scenarioContainer;
 
     Random random = new Random();//random decision to follow or decline a policy
-    String pol = random.nextInt(4 - 0) + 1 + "";
+    int max = 5;
+    int min = 0;
+    int diff = max - min;
+    String pol = random.nextInt(diff + 1) + "";
 
 
     Scenario() {
@@ -90,7 +98,7 @@ public class Scenario implements Serializable {
 
     }
 
-    public List getloadzone() {
+    public List getScenario() {
         return scenarioContainer;
     }
 

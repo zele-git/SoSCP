@@ -34,7 +34,7 @@ public class SoSAgent extends Agent {
     WriteToFile wtf = new WriteToFile();
     // scenario information
     Scenario scenario = new Scenario();
-    int cont = scenario.getloadzone().size();
+    int cont = scenario.getScenario().size();
 
     List<String> stat = new ArrayList();
     List<List<String>> rprt = new ArrayList();
@@ -59,6 +59,7 @@ public class SoSAgent extends Agent {
             dfd.addServices(service);
             System.out.println("service type: " + serviceType.get(i));
 
+            
         }
 
         try {
@@ -90,7 +91,7 @@ public class SoSAgent extends Agent {
         System.out.println(decision);
     }
 
-    // responding for requests from other agents
+    // inform current scenario with recommended policies
     private class serveRequest extends CyclicBehaviour {
         public void action() {
             MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.CFP);
@@ -183,7 +184,7 @@ public class SoSAgent extends Agent {
                             //number of death when nacks are greater than acks
                             if (nackActionCounter > 4 && nackActionCounter > 2 * ackActionCounter) {
                                 Random random = new Random();
-                                int rindex = random.nextInt(scenario.getloadzone().size() - 0) + 0;
+                                int rindex = random.nextInt(scenario.getScenario().size() - 0) + 0;
                                 if (scenario.getLDZpatientNumber(rindex) > 0) {
                                     scenario.updateldz(rindex);
                                     lost++;
@@ -244,7 +245,7 @@ public class SoSAgent extends Agent {
                             //why probability ?
                             if (nackActionCounter > 4 && nackActionCounter > 2 * ackActionCounter) {
                                 Random random = new Random();
-                                int rindex = random.nextInt(scenario.getloadzone().size() - 0) + 0;
+                                int rindex = random.nextInt(scenario.getScenario().size() - 0) + 0;
                                 double probability = Math.random();
                                 if (probability < 0.65) {
                                     if (scenario.getLDZpatientNumber(rindex) > 0) {
@@ -337,6 +338,7 @@ public class SoSAgent extends Agent {
 
                 int rownum = 1;
                 int cellnum = 0;
+
                 while (i.hasNext()) {
                     List<String> templist = (List<String>) i.next();
                     Iterator<String> tempIterator = templist.iterator();

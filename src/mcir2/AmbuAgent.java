@@ -107,10 +107,9 @@ public class AmbuAgent extends Agent {
                         if (reply.getPerformative() == ACLMessage.PROPOSE) {
                             scenarolist = new ArrayList<>();
                             replylist = new ArrayList();
-
                             agentid = reply.getSender();//
                             try {
-                                replylist = ((Scenario) reply.getContentObject()).getloadzone();
+                                replylist = ((Scenario) reply.getContentObject()).getScenario();
                                 evNumber = ((Scenario) reply.getContentObject()).getEvNumbers();
 
 //                                System.out.println("Inputs from SoS manager: " + replylist + " Number of ev: " + evNumber);
